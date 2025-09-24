@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOHAM'S PORTFOLIO</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #070734;
+            --nav-bg: #0a0a6d;
+            --accent-color: #8a2be2;
+            --text-light: #ffffff;
+            --text-gray: #aaaaaa;
+            --footer-bg: #080516;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: var(--nav-bg);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 180px 0 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--text-gray);
+        }
+
+        .accent-text {
+            color: var(--accent-color);
+        }
+
+        .typing-text {
+            font-size: 3.5rem;
+            font-weight: 600;
+            min-height: 80px;
+            color: var(--accent-color);
+        }
+
+        .btn-custom {
+            padding: 12px 25px;
+            background-color: #1e2167;
+            color: white;
+            border: 1px solid white;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Work Experience Section */
+        .work-section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline:after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: rgba(255, 255, 255, 0.1);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 3px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            border-left: none;
+            border-right: 3px solid var(--accent-color);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.2);
+        }
+
+        .timeline-date {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .timeline-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            right: -50px;
+            background-color: var(--nav-bg);
+            border: 4px solid var(--accent-color);
+            border-radius: 50%;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(even) .timeline-icon {
+            left: -50px;
+        }
+
+        .timeline-icon img {
+            width: 95%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .timeline-icon:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--footer-bg);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .footer-col {
+            margin-bottom: 30px;
+        }
+
+        .footer-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+        }
+
+        .footer-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 991.98px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .typing-text {
+                font-size: 2rem;
+                min-height: 60px;
+            }
+            
+            .timeline:after {
+                left: 50px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-icon {
+                left: 10px;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-icon {
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .hero-section {
+                padding: 150px 0 80px;
+                text-align: center;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .btn-group {
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .timeline-content {
+                padding: 20px;
+            }
+            
+            .timeline-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .typing-text {
+                font-size: 1.5rem;
+                min-height: 50px;
+            }
+            
+            .btn-custom {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .timeline-icon {
+                width: 80px;
+                height: 80px;
+                left: 5px;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-icon {
+                left: 5px;
+            }
+        }
+
+
+
+
+        
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+    <!-- Navigation -->
+    
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-code me-2"></i> SOHAM'S PORTFOLIO
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">
+                        <i class="fas fa-home me-1"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">
+                        <i class="fas fa-user me-1"></i> About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="project.html">
+                        <i class="fas fa-project-diagram me-1"></i> Projects
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="work.html">
+                        <i class="fas fa-briefcase me-1"></i> Work
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">
+                        <i class="fas fa-envelope me-1"></i> Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title">Hi, I'm <span class="accent-text">Soham</span></h1>
+                    <h2 class="hero-subtitle">And I'm passionate about</h2>
+                    <div class="typing-text"><span id="element"></span></div>
+                    <div class="btn-group mt-4">
+                        <a href="https://drive.google.com/file/d/1hqBUWdmHtBMrScXI05k7UPaCahMW5w_Q/view?usp=drivesdk" class="btn btn-custom">Download Resume</a>
+                        <a href="https://github.com/sohamkachale?tab=repositories" class="btn btn-custom">Visit GitHub</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="./img/p1(1).png" alt="Developer Illustration" class="hero-image img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="work" class="work-section">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">What I Have Done So Far</h3>
+                <h2 class="section-title">Language Experience</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        
+                        <h3 class="timeline-title">Basic Web Developer</h3>
+                        <p class="timeline-desc">
+                            I'm a web developer with a strong understanding of HTML, CSS, and JavaScript. I use these
+                            core technologies to build simple, responsive, and user-friendly websites. Whether it's creating
+                            the structure with HTML, styling with CSS, or adding interactivity using JavaScript, I enjoy
+                            bringing ideas to life on the web.
+                        </p>
+                    </div>
+                    <div class="timeline-icon">
+                        <img src="./img/HTML-CSS-JS-Logo.png" alt="Web Development" class="img-fluid">
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                      
+                        <h3 class="timeline-title">Bootstrap Developer</h3>
+                        <p class="timeline-desc">
+                            I use Bootstrap 5 to build responsive and mobile-friendly websites quickly and efficiently. It
+                            helps me create clean layouts, modern components, and consistent designs without writing a lot of
+                            custom CSS. With Bootstrap 5, I can make websites look good on all screen sizes and save time by
+                            using its built-in grid system, buttons, navbars, and more.
+                        </p>
+                    </div>
+                    <div class="timeline-icon">
+                        <img src="./img/bootstrap5-removebg-preview.png" alt="Bootstrap" class="img-fluid">
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                       
+                        <h3 class="timeline-title">React + Node Developer</h3>
+                        <p class="timeline-desc">
+                            I work with React JS to build fast and interactive user interfaces. React helps me create reusable
+                            components and manage the front-end efficiently. On the backend, I use Node JS to handle
+                            server-side logic, APIs, and database connections. Together, React and Node allow me to build
+                            full-stack web applications that are dynamic, scalable, and user-friendly.
+                        </p>
+                    </div>
+                    <div class="timeline-icon">
+                        <img src="./img/ChatGPT Image Jul 26, 2025, 02_26_11 PM.png" alt="React" class="img-fluid">
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        
+                        <h3 class="timeline-title">MySQL Developer</h3>
+                        <p class="timeline-desc">
+                            As a MySQL developer, I work with databases to store, manage, and organize data efficiently. I
+                            write SQL queries to insert, update, delete, and retrieve information from databases. I design
+                            tables with proper relationships and ensure the data is structured and optimized. My focus is on
+                            building secure, reliable, and well-organized database systems for web applications.
+                        </p>
+                    </div>
+                    <div class="timeline-icon">
+                        <img src="./img/mysq.png" alt="MySQL" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 footer-col">
+                    <h3 class="footer-title">SOHAM'S PORTFOLIO</h3>
+                    <p>Creative developer passionate about building beautiful, functional digital experiences.</p>
+                    <div class="social-links mt-4">
+                        <a href="https://github.com/sohamkachale?tab=overview&from=2025-05-01&to=2025-05-27"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/soham-kachale-b02810312?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 footer-col">
+                    <h4 class="footer-subtitle">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#work">Work</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 footer-col">
+                    <h4 class="footer-subtitle">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Web Development</a></li>
+                          <li><a href="#">Frontend Development</a></li>
+                        <li><a href="#">Backend Integration</a></li>
+                        <li><a href="#">Onepage Applications</a></li>
+                      
+                    </ul>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 footer-col">
+                    <h4 class="footer-subtitle">Contact Info</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope me-2"></i> sohamkachale7@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i> 91 8657417401</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> PUNE,MAHARASHTRA </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Soham. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Typed.js initialization
+        var typed = new Typed('#element', {
+            strings: ['Web Development', 'Backend Developer', 'React Applications', 'Database Developer'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animate timeline items on scroll
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        function checkVisibility() {
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (itemTop < windowHeight - 100) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+        
+        // Initial check
+        checkVisibility();
+        
+        // Check on scroll
+        window.addEventListener('scroll', checkVisibility);
+    </script>
+</body>
+</html>
